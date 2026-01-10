@@ -1,0 +1,62 @@
+<div style="max-width: 900px; margin: 40px auto; font-family: system-ui;">
+  <h1>Inventaire de matériel IT</h1>
+
+  <div style="display:flex; gap:10px; align-items:center; margin: 10px 0 20px;">
+    <label>Type:</label>
+    <select [(ngModel)]="filterType" (change)="refresh()">
+      <option value="">Tous</option>
+      <option value="laptop">laptop</option>
+      <option value="screen">screen</option>
+      <option value="phone">phone</option>
+      <option value="printer">printer</option>
+      <option value="other">other</option>
+    </select>
+
+    <label>Statut:</label>
+    <select [(ngModel)]="filterStatus" (change)="refresh()">
+      <option value="">Tous</option>
+      <option value="in_stock">in_stock</option>
+      <option value="assigned">assigned</option>
+      <option value="retired">retired</option>
+    </select>
+
+    <button (click)="refresh()">Rafraîchir</button>
+  </div>
+
+  <div style="border:1px solid #ddd; border-radius:10px; padding:14px; margin-bottom:18px;">
+    <h3 style="margin: 0 0 10px;">Ajouter un matériel</h3>
+
+    <div style="display:grid; grid-template-columns: 2fr 1fr 1fr auto; gap:10px; align-items:center;">
+      <input [(ngModel)]="name" placeholder="Nom (ex: Lenovo T14)" style="padding:10px;">
+      <select [(ngModel)]="type" style="padding:10px;">
+        <option value="laptop">laptop</option>
+        <option value="screen">screen</option>
+        <option value="phone">phone</option>
+        <option value="printer">printer</option>
+        <option value="other">other</option>
+      </select>
+      <input [(ngModel)]="owner" placeholder="Service (ex: RH)" style="padding:10px;">
+      <button (click)="add()" style="padding:10px 14px;">Ajouter</button>
+    </div>
+  </div>
+
+  <p *ngIf="error"><b>Erreur :</b> {{ error }}</p>
+
+  <div *ngFor="let e of equipment"
+       style="border:1px solid #ddd; border-radius:10px; padding:12px; margin-bottom:10px;">
+    <div style="display:flex; gap:10px; align-items:center;">
+      <b style="flex:1;">#{{ e.id }} — {{ e.name }}</b>
+      <span style="font-size:12px; border:1px solid #ccc; border-radius:999px; padding:4px 10px;">
+        {{ e.type }} · {{ e.status }} · {{ e.owner }}
+      </span>
+    </div>
+
+    <div style="display:flex; gap:8px; margin-top:10px;">
+      <button (click)="setStatus(e, 'in_stock')">In stock</button>
+      <button (click)="setStatus(e, 'assigned')">Assigned</button>
+      <button (click)="setStatus(e, 'retired')">Retired</button>
+      <span style="flex:1;"></span>
+      <button (click)="remove(e)">Supprimer</button>
+    </div>
+  </div>
+</div>

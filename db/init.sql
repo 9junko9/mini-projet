@@ -1,0 +1,13 @@
+CREATE TABLE IF NOT EXISTS equipment (
+  id SERIAL PRIMARY KEY,
+  name TEXT NOT NULL,
+  type TEXT NOT NULL,
+  status TEXT NOT NULL,
+  owner TEXT NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+INSERT INTO equipment (name, type, status, owner) VALUES
+('Dell Latitude 7420', 'laptop', 'in_stock', 'IT'),
+('HP EliteDisplay', 'screen', 'assigned', 'Finance'),
+('iPhone SE', 'phone', 'assigned', 'RH');
