@@ -5,7 +5,7 @@ import { Equipment } from './models';
 @Injectable({ providedIn: 'root' })
 export class EquipmentService {
   // côté navigateur, "localhost" est OK
-  private api = 'http://localhost:8000';
+  private api = '/api';
 
   constructor(private http: HttpClient) {}
 
